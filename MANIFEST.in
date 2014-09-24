@@ -1,0 +1,4 @@
+include *.cfg *.rst *.in *.txt
+graft src/mons/urban
+graft docs
+global-exclude *pyc
