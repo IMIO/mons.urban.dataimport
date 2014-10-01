@@ -18,7 +18,7 @@ long_description = \
 
 setup(
     name='mons.urban.dataimport',
-    version='0.1',
+    version='0.1dev',
     description="",
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -28,8 +28,8 @@ setup(
         "Programming Language :: Python :: 2.7",
     ],
     keywords='Python Zope Plone',
-    author='Franck NGAHA',
-    author_email='franck.o.ngaha@gmail.com',
+    author='Franck NGAHA, Simon DELCOURT',
+    author_email='franck.ngaha@imio.be, simon.delcourt@imio.be',
     url='http://pypi.python.org/pypi/mons.urban.dataimport',
     license='GPL V2',
     packages=find_packages('src', exclude=['ez_setup']),
@@ -38,9 +38,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'five.grok',
-        'plone.api',
-        'setuptools',
+        'imio.urban.dataimport',
     ],
     extras_require={
         'test': [
