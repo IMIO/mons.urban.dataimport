@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="/svnindex.xsl"?>
+<!DOCTYPE svn [
+  <!ELEMENT svn   (index)>
+  <!ATTLIST svn   version CDATA #REQUIRED
+                  href    CDATA #REQUIRED>
+  <!ELEMENT index (updir?, (file | dir)*)>
+  <!ATTLIST index name    CDATA #IMPLIED
+                  path    CDATA #IMPLIED
+                  rev     CDATA #IMPLIED
+                  base    CDATA #IMPLIED>
+  <!ELEMENT updir EMPTY>
+  <!ELEMENT file  EMPTY>
+  <!ATTLIST file  name    CDATA #REQUIRED
+                  href    CDATA #REQUIRED>
+  <!ELEMENT dir   EMPTY>
+  <!ATTLIST dir   name    CDATA #REQUIRED
+                  href    CDATA #REQUIRED>
+]>
+<svn version="1.6.17 (r1128011)"
+     href="http://subversion.tigris.org/">
+  <index rev="17974" path="/communesplone/imio.urban.dataimport/profiles/mons" base="svn">
+    <updir />
+    <dir name="AIHM" href="AIHM/" />
+    <dir name="IG" href="IG/" />
+    <file name="Urbanisme.mdb" href="Urbanisme.mdb" />
+    <file name="__init__.py" href="__init__.py" />
+    <file name="dataimport_mons_marker.txt" href="dataimport_mons_marker.txt" />
+    <file name="import_steps.xml" href="import_steps.xml" />
+  </index>
+</svn>

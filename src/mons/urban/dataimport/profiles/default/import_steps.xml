@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<import-steps>
+
+ <import-step
+    id="mons.urban.dataimport-monsAIHMMigration"
+    handler="mons.urban.dataimport.AIHM.importer.importMonsAIHM"
+    title="AIHM import for Mons"
+    version="2013-01-04T11:30:41.455297">
+  AIHM import for Mons
+ </import-step>
+
+ <import-step
+    id="mons.urban.dataimport-monsIndicateurGeneralMigration"
+    handler="mons.urban.dataimport.IG.importer.importIG"
+    title="Excel import for Mons"
+    version="2013-01-04T11:30:41.455297">
+  Indicateur General (excel file) import for Mons
+ </import-step>
+
+</import-steps>

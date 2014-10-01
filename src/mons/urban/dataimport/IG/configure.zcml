@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="imio.urban.dataimport">
+
+  <adapter
+     for="mons.urban.dataimport.IG.interfaces.IIGDataImporter"
+     factory=".importer.IGMapping"
+     provides="imio.urban.dataimport.interfaces.IObjectsMapping"
+     name="objects mapping"
+  />
+
+  <adapter
+     for="mons.urban.dataimport.IG.interfaces.IIGDataImporter"
+     factory=".importer.IGValuesMapping"
+     provides="imio.urban.dataimport.interfaces.IValuesMapping"
+     name="values mapping"
+  />
+
+  <adapter
+     for="imio.urban.dataimport.profiles.mons.IG.interfaces.IIGDataImporter
+          imio.urban.dataimport.interfaces.IImportSection
+          zope.interface.Interface
+          zope.interface.Interface
+          zope.interface.Interface"
+     factory="imio.urban.dataimport.csv.importer.CSVErrorMessage"
+     provides="imio.urban.dataimport.interfaces.IImportErrorMessage"
+  />
+
+</configure>
