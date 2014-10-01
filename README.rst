@@ -4,10 +4,10 @@ mons.urban.dataimport
 
 
 
-* `Source code @ GitHub <https://github.com/fngaha, sdelcourt/mons.urban.dataimport>`_
+* `Source code @ GitHub <https://github.com/imio/mons.urban.dataimport>`_
 * `Releases @ PyPI <http://pypi.python.org/pypi/mons.urban.dataimport>`_
 * `Documentation @ ReadTheDocs <http://monsurbandataimport.readthedocs.org>`_
-* `Continuous Integration @ Travis-CI <http://travis-ci.org/fngaha, sdelcourt/mons.urban.dataimport>`_
+* `Continuous Integration @ Travis-CI <http://travis-ci.org/imio/mons.urban.dataimport>`_
 
 How it works
 ============
