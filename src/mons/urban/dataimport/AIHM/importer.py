@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
-from imio.urban.dataimport.AIHM.importer import importAIHM
+
+from zope.interface import implements
+
+from mons.urban.dataimport.interfaces import IMonsDataImporter
+
+from imio.urban.dataimport.AIHM.importer import AIHMDataImporter
 
 
-def importMonsAIHM(context):
-    """ Just calls the default AIHM import from Mons AIHM profile """
-    if context.readDataFile('monsurbandataimport_marker.txt') is None:
-        return
+class LicencesImporter(AIHMDataImporter):
+    """ """
 
-    importAIHM(context)
+    implements(IMonsDataImporter)
+
+    def __init__(self, context, db_name, table_name='Urbanisme', key_column='CLEF', savepoint_length=0):
+        super(LicencesImporter, self).__init__(db_name, table_name, key_column, savepoint_length)

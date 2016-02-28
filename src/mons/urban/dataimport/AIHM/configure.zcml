@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="mons.urban.dataimport">
+
+  <adapter
+      for="imio.urban.dataimport.interfaces.IImportSettingsForm"
+      factory=".settings.MonsImporterFromSettingsForm"
+      provides="imio.urban.dataimport.AIHM.interfaces.IAIHMDataImporter"
+      name="Mons AIHM licences"
+      />
+
+</configure>
