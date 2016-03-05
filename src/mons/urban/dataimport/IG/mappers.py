@@ -33,14 +33,14 @@ class IdMapper(Mapper):
 
 class PortalTypeMapper(Mapper):
     def mapPortal_type(self, line):
-        type_value = self.getData('Type de permis')
+        type_value = self.getData('Type de permis').upper()
         portal_type = self.getValueMapping('type_map')[type_value]['portal_type']
         if not portal_type:
             self.logError(self, line, 'No portal type found for this type value', {'TYPE value': type_value})
         return portal_type
 
     def mapFoldercategory(self, line):
-        type_value = self.getData('Type de permis')
+        type_value = self.getData('Type de permis').upper()
         foldercategory = self.getValueMapping('type_map')[type_value]['foldercategory']
         return foldercategory
 
