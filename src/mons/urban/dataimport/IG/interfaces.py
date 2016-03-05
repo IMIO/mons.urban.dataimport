@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from zope.interface import Interface
+from imio.urban.dataimport.csv.interfaces import ICSVImporter
 
 
-class IIGDataImporter(Interface):
+class IIGDataImporter(ICSVImporter):
     """ marker interface for AIHM importer """

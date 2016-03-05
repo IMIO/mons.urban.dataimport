@@ -3,14 +3,8 @@
 from imio.urban.dataimport.AIHM.importer import AIHMDataImporter
 from imio.urban.dataimport.AIHM.interfaces import IAIHMDataImporter
 from imio.urban.dataimport.browser.adapter import ImporterFromSettingsForm
-from imio.urban.dataimport.browser.import_panel import ImporterSettings
 
 from zope.interface import implements
-
-
-class MonsImporterSettings(ImporterSettings):
-    """
-    """
 
 
 class MonsImporterFromSettingsForm(ImporterFromSettingsForm):

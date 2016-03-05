@@ -19,7 +19,7 @@ from Products.CMFCore.utils import getToolByName
 
 
 class LicenceFactory(BaseFactory):
-    def getCreationPlace(self, **kwargs):
+    def getCreationPlace(self, kwargs):
         path = '%s/urban/%ss' % (self.site.absolute_url_path(), kwargs['portal_type'].lower())
         return self.site.restrictedTraverse(path)
 
@@ -178,11 +178,11 @@ class ErrorsMapper(FinalMapper):
 
 
 class ContactFactory(BaseFactory):
-    def create(self, place, **kwargs):
-        return super(ContactFactory, self).create(place, **kwargs)
+    def create(self, kwargs, container, line):
+        return super(ContactFactory, self).create(kwargs, container, line)
 
-    def getPortalType(self, place, **kwargs):
-        if place.portal_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter']:
+    def getPortalType(self, container, **kwargs):
+        if container.portal_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter']:
             return 'Proprietary'
         return 'Applicant'
 
@@ -227,29 +227,23 @@ class ContactNumberMapper(Mapper):
 
 
 class ParcelFactory(BaseFactory):
-    def create(self, place=None, line=None, **factory_args):
-        found_parcels = {}
+    def create(self, kwargs, container, line):
         searchview = self.site.restrictedTraverse('searchparcels')
-        for index, full_args in factory_args.iteritems():
-            argnames = ['division', 'section', 'radical', 'puissance', 'exposant']
-            args = {}
-            for name in argnames:
-                args[name] = full_args.get(name, '')
-            #need to trick the search browser view about the args in its request
-            for k, v in args.iteritems():
-                searchview.context.REQUEST[k] = v
-            #check if we can find a parcel in the db cadastre with these infos
-            found = searchview.findParcel(**args)
-            if not found:
-                found = searchview.findParcel(browseoldparcels=True, **args)
-            if len(found) == 1:
-                args['divisionCode'] = args['division']
-                args['division'] = args['division']
-                found_parcels[index] = args
-            else:
-                found_parcels[index] = full_args
-                self.logError(self, 'Too much parcels found or not enough parcels found', {'args': args, 'search result': len(found)})
-        return super(ParcelFactory, self).create(place=place, **found_parcels)
+
+        for k, v in kwargs.iteritems():
+            searchview.context.REQUEST[k] = v
+        #check if we can find a parcel in the db cadastre with these infos
+        found = searchview.findParcel(**kwargs)
+        if not found:
+            found = searchview.findParcel(browseoldparcels=True, **kwargs)
+        if len(found) == 1:
+            kwargs['divisionCode'] = kwargs['division']
+            kwargs['division'] = kwargs['division']
+        else:
+            self.logError(self, 'Too much parcels found or not enough parcels found', {'kwargs': kwargs, 'search result': len(found)})
+        kwargs['id'] = ''.join([''.join(cleanAndSplitWord(ref)) for ref in kwargs.values()])
+        kwargs['id'] = kwargs['id'].replace('/', '')
+        return super(ParcelFactory, self).create(kwargs, container=container, line=line)
 
 # mappers
 
@@ -297,7 +291,6 @@ class ParcelReferencesMapper(Mapper):
             if ref:
                 references.append(ref)
 
-        references = dict([(str(i), ref) for i, ref in enumerate(references)])
         return references
 
     def getSecondaryReference(self, secondary_ref, base_ref):
@@ -379,7 +372,7 @@ class ParcelReferencesMapper(Mapper):
         except:
             self.logError(self, self.line, 'No division found')
             return
-        result = {'division': division, 'divisioncode': division}
+        result = {'division': division}
         return result
 
     def tokenizeReference(self, reference):
@@ -415,15 +408,15 @@ def convertDate(mapper, line, date):
 
 
 class UrbanDepositEventFactory(BaseFactory):
-    def getPortalType(self):
+    def getPortalType(self, container):
         return 'UrbanEvent'
 
-    def create(self, place, **kwargs):
+    def create(self, kwargs, container, line):
         if not kwargs['eventtype'] or not kwargs['eventDate']:
-            return []
-        event = place.createUrbanEvent(kwargs['eventtype'])
+            return None
+        event = container.createUrbanEvent(kwargs['eventtype'])
         event.setEventDate(kwargs['eventDate'])
-        return [event]
+        return event
 
 #mappers
 
@@ -453,21 +446,21 @@ class DepositDateMapper(Mapper):
 
 
 class UrbanDecisionEventFactory(BaseFactory):
-    def getPortalType(self):
+    def getPortalType(self, container):
         return 'UrbanEvent'
 
-    def create(self, place, **kwargs):
+    def create(self, kwargs, container, line):
         if not kwargs['eventtype']:
-            return []
-        if place.portal_type in ['ParcelOutLicence', 'BuildLicence', 'UrbanCertificateTwo']:
+            return None
+        if container.portal_type in ['ParcelOutLicence', 'BuildLicence', 'UrbanCertificateTwo']:
             if not kwargs['decisionDate']:
-                return []
+                return None
         elif not kwargs['eventDate']:
-            return []
-        event = place.createUrbanEvent(kwargs['eventtype'])
-        if place.portal_type in ['ParcelOutLicence', 'BuildLicence', 'UrbanCertificateTwo']:
+            return None
+        event = container.createUrbanEvent(kwargs['eventtype'])
+        if container.portal_type in ['ParcelOutLicence', 'BuildLicence', 'UrbanCertificateTwo']:
             event.setDecisionDate(kwargs['decisionDate'])
-        return [event]
+        return event
 
 
 #mappers

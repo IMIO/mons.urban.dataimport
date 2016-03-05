@@ -14,6 +14,9 @@ class IGDataImporter(CSVDataImporter):
 
     implements(IIGDataImporter)
 
+    def __init__(self, csv_filename='IG-urbanisme.csv', key_column='N°', savepoint_length=0):
+        super(IGDataImporter, self).__init__(csv_filename, key_column)
+
 
 class IGMapping(ObjectsMapping):
     """ """
@@ -30,19 +33,3 @@ class IGValuesMapping(ValuesMapping):
 
     def getValueMapping(self, mapping_name):
         return valuesmapping.VALUES_MAPS.get(mapping_name, None)
-
-
-def importIG(context):
-    """
-    """
-    if context.readDataFile('monsurbandataimport_marker.txt') is None:
-        return
-
-    ig_filename = 'IG/IG-urbanisme.csv'
-    key_column = 'N°'
-
-    IG_dataimporter = IGDataImporter(context, ig_filename, key_column)
-
-    IG_dataimporter.importData(start=1, end=1000)
-
-    IG_dataimporter.picklesErrorLog(filename='ig error log')

@@ -4,6 +4,13 @@
     i18n_domain="imio.urban.dataimport">
 
   <adapter
+      for="imio.urban.dataimport.interfaces.IImportSettingsForm"
+      factory=".settings.MonsIGImporterFromSettingsForm"
+      provides="mons.urban.dataimport.IG.interfaces.IIGDataImporter"
+      name="Mons IG licences"
+      />
+
+  <adapter
      for="mons.urban.dataimport.IG.interfaces.IIGDataImporter"
      factory=".importer.IGMapping"
      provides="imio.urban.dataimport.interfaces.IObjectsMapping"
@@ -18,7 +25,7 @@
   />
 
   <adapter
-     for="imio.urban.dataimport.profiles.mons.IG.interfaces.IIGDataImporter
+     for="mons.urban.dataimport.IG.interfaces.IIGDataImporter
           imio.urban.dataimport.interfaces.IImportSection
           zope.interface.Interface
           zope.interface.Interface
