@@ -242,7 +242,7 @@ class ParcelFactory(BaseFactory):
         else:
             self.logError(self, 'Too much parcels found or not enough parcels found', {'kwargs': kwargs, 'search result': len(found)})
         kwargs['id'] = ''.join([''.join(cleanAndSplitWord(ref)) for ref in kwargs.values()])
-        kwargs['id'] = kwargs['id'].replace('/', '')
+        kwargs['id'] = normalizeString(kwargs['id'].replace('/', ''))
         if kwargs['id'] in container.objectIds():
             return None
         return super(ParcelFactory, self).create(kwargs, container=container, line=line)
