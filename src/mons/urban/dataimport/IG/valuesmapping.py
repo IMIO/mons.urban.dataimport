@@ -16,10 +16,13 @@ VALUES_MAPS = {
 'C.U. 2'  : ['UrbanCertificateTwo', 'cu2',            'CU2'],
 '22'      : ['NotaryLetter',        '',               'Not'],
 '30'      : ['ParcelOutLicence',    '',               'PL'],
+'PL'      : ['ParcelOutLicence',    '',               'PL'],
+'MPL'     : ['ParcelOutLicence',    '',               'MPL'],
 '40'      : ['MiscDemand',          'apct',           'DD'],
 '50'      : ['Article127',          '',               'PU'],
 '80'      : ['BuildLicence',        'pu',             'PU'],
 '82'      : ['Declaration',         'dup',            'Decl'],
+'D'       : ['Declaration',         'dup',            'Decl'],
 '100'     : ['MiscDemand',          'apct',           'Decl'],
 }),
 
